@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hayden — Computer Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8f7f4;
+      --surface: #ffffff;
+      --text: #111110;
+      --muted: #6b6a66;
+      --subtle: #d4d2cb;
+      --accent: #1a1a18;
+      --tag-bg: #efefec;
+      --tag-text: #444440;
+      --mono: 'DM Mono', monospace;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(248, 247, 244, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--subtle);
+      z-index: 100;
+      padding: 0 2rem;
+      height: 56px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+
+    .nav-logo span { color: var(--text); font-weight: 500; }
+
+    .nav-links {
+      display: flex; gap: 2rem; list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    /* ─── SECTIONS ─── */
+    section {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 7rem 2rem 4rem;
+    }
+
+    section:first-of-type { padding-top: 10rem; }
+
+    /* ─── HERO ─── */
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .hero-tag::before {
+      content: '';
+      display: inline-block;
+      width: 20px; height: 1px;
+      background: var(--muted);
+    }
+
+    h1 {
+      font-size: clamp(2.6rem, 6vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    h1 strong {
+      font-weight: 500;
+    }
+
+    .hero-desc {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 400;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+      border: 1px solid var(--text);
+    }
+
+    .btn-primary:hover { background: #333330; border-color: #333330; }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--subtle);
+    }
+
+    .btn-secondary:hover { border-color: var(--muted); }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      width: 40px; height: 1px;
+      background: var(--subtle);
+      margin: 0 auto 3rem;
+    }
+
+    /* ─── SECTION LABELS ─── */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
+      display: flex; align-items: center; gap: 12px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--subtle);
+    }
+
+    /* ─── SKILLS GRID ─── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--subtle);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--subtle);
+    }
+
+    .skill-cell {
+      background: var(--surface);
+      padding: 1.4rem 1.5rem;
+    }
+
+    .skill-cell-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .skill-tags {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+
+    .tag {
+      font-size: 12px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 3px 9px;
+      border-radius: 3px;
+      font-family: var(--mono);
+    }
+
+    /* ─── PROJECTS ─── */
+    .projects-list {
+      display: flex; flex-direction: column; gap: 1px;
+      border: 1px solid var(--subtle);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--subtle);
+    }
+
+    .project-card {
+      background: var(--surface);
+      padding: 1.8rem 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+    }
+
+    .project-card:hover { background: #fafaf8; }
+
+    .project-number {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-title {
+      font-size: 17px;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 480px;
+    }
+
+    .project-meta {
+      display: flex; flex-direction: column; align-items: flex-end; gap: 8px;
+    }
+
+    .project-arrow {
+      font-size: 18px;
+      color: var(--muted);
+    }
+
+    .project-stack {
+      display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end;
+    }
+
+    /* ─── EXPERIENCE ─── */
+    .exp-list {
+      display: flex; flex-direction: column; gap: 2.5rem;
+    }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1.5rem;
+    }
+
+    .exp-date {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      padding-top: 3px;
+    }
+
+    .exp-title {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+
+    .exp-company {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      font-size: 14px;
+      color: var(--muted);
+      display: flex; flex-direction: column; gap: 4px;
+    }
+
+    .exp-bullets li::before {
+      content: '— ';
+      color: var(--subtle);
+    }
+
+    /* ─── CONTACT ─── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      border: 1px solid var(--subtle);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--subtle);
+      margin-bottom: 2rem;
+    }
+
+    .contact-link {
+      background: var(--surface);
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 400;
+      transition: background 0.15s;
+    }
+
+    .contact-link:hover { background: #fafaf8; }
+
+    .contact-link-label {
+      display: flex; flex-direction: column; gap: 3px;
+    }
+
+    .contact-link-type {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--subtle);
+      padding: 2rem;
+      text-align: center;
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 600px) {
+      .exp-item { grid-template-columns: 1fr; gap: 0.4rem; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .project-card { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo"><span>Hayden</span> / CE</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="about">
+    <div class="hero-tag">Computer Engineering</div>
+    <h1>Building systems<br>that <strong>actually work.</strong></h1>
+    <p class="hero-desc">
+      I'm Hayden, a computer engineer passionate about hardware-software co-design,
+      embedded systems, and writing clean, efficient code from bare metal to the cloud.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">View projects →</a>
+      <a href="#contact" class="btn btn-secondary">Get in touch</a>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section>
+    <div class="section-label">Skills</div>
+    <div class="skills-grid fade-in">
+      <div class="skill-cell">
+        <div class="skill-cell-title">Languages</div>
+        <div class="skill-tags">
+          <span class="tag">C</span>
+          <span class="tag">C++</span>
+          <span class="tag">Python</span>
+          <span class="tag">VHDL</span>
+          <span class="tag">Assembly</span>
+        </div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-title">Hardware</div>
+        <div class="skill-tags">
+          <span class="tag">FPGA</span>
+          <span class="tag">Verilog</span>
+          <span class="tag">PCB Design</span>
+          <span class="tag">Altium</span>
+        </div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-title">Embedded</div>
+        <div class="skill-tags">
+          <span class="tag">ARM Cortex</span>
+          <span class="tag">RTOS</span>
+          <span class="tag">I²C/SPI/UART</span>
+          <span class="tag">STM32</span>
+        </div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-title">Tools</div>
+        <div class="skill-tags">
+          <span class="tag">Git</span>
+          <span class="tag">Linux</span>
+          <span class="tag">Docker</span>
+          <span class="tag">GDB</span>
+          <span class="tag">Vivado</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">Projects</div>
+    <div class="projects-list fade-in">
+
+      <a class="project-card" href="#">
+        <div>
+          <div class="project-number">01</div>
+          <div class="project-title">RISC-V Softcore Processor</div>
+          <p class="project-desc">Designed and implemented a 5-stage pipelined RISC-V processor on an FPGA with hazard detection, branch prediction, and a custom cache hierarchy.</p>
+        </div>
+        <div class="project-meta">
+          <span class="project-arrow">↗</span>
+          <div class="project-stack">
+            <span class="tag">VHDL</span>
+            <span class="tag">Vivado</span>
+            <span class="tag">FPGA</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="project-card" href="#">
+        <div>
+          <div class="project-number">02</div>
+          <div class="project-title">Autonomous Drone Controller</div>
+          <p class="project-desc">Built a real-time flight controller on STM32 using a custom RTOS scheduler, PID loops, and sensor fusion from IMU, barometer, and GPS modules.</p>
+        </div>
+        <div class="project-meta">
+          <span class="project-arrow">↗</span>
+          <div class="project-stack">
+            <span class="tag">C</span>
+            <span class="tag">STM32</span>
+            <span class="tag">RTOS</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="project-card" href="#">
+        <div>
+          <div class="project-number">03</div>
+          <div class="project-title">Low-Latency Network Stack</div>
+          <p class="project-desc">Implemented a user-space TCP/IP stack with kernel bypass (DPDK) targeting sub-microsecond packet processing for financial data feeds.</p>
+        </div>
+        <div class="project-meta">
+          <span class="project-arrow">↗</span>
+          <div class="project-stack">
+            <span class="tag">C++</span>
+            <span class="tag">DPDK</span>
+            <span class="tag">Linux</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="project-card" href="#">
+        <div>
+          <div class="project-number">04</div>
+          <div class="project-title">Custom PCB Power Management IC</div>
+          <p class="project-desc">Designed a 4-layer PCB for a battery-powered IoT node with adaptive power modes, wireless charging, and a custom firmware bootloader.</p>
+        </div>
+        <div class="project-meta">
+          <span class="project-arrow">↗</span>
+          <div class="project-stack">
+            <span class="tag">Altium</span>
+            <span class="tag">C</span>
+            <span class="tag">IoT</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Experience</div>
+    <div class="exp-list fade-in">
+
+      <div class="exp-item">
+        <div class="exp-date">2024 — Present</div>
+        <div>
+          <div class="exp-title">Firmware Engineering Intern</div>
+          <div class="exp-company">Acme Robotics · Miami, FL</div>
+          <ul class="exp-bullets">
+            <li>Developed bare-metal drivers for motor controllers over CAN bus</li>
+            <li>Reduced boot time by 40% through linker script optimization</li>
+            <li>Wrote integration tests using HIL simulation framework</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">Summer 2023</div>
+        <div>
+          <div class="exp-title">Hardware Design Intern</div>
+          <div class="exp-company">TechCore Systems · Remote</div>
+          <ul class="exp-bullets">
+            <li>Designed schematics and PCB layouts for sensor breakout boards</li>
+            <li>Validated signal integrity with oscilloscope and logic analyzer</li>
+            <li>Authored design review documentation for production handoff</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-date">2021 — 2025</div>
+        <div>
+          <div class="exp-title">B.S. Computer Engineering</div>
+          <div class="exp-company">University of Florida · Gainesville, FL</div>
+          <ul class="exp-bullets">
+            <li>GPA: 3.8 · Dean's List every semester</div>
+            <li>IEEE Student Chapter · Embedded Systems Lab TA</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-label">Contact</div>
+    <div class="contact-grid fade-in">
+      <a class="contact-link" href="mailto:hayden@email.com">
+        <div class="contact-link-label">
+          <span class="contact-link-type">Email</span>
+          <span>hayden@email.com</span>
+        </div>
+        <span>↗</span>
+      </a>
+      <a class="contact-link" href="https://linkedin.com/in/hayden" target="_blank">
+        <div class="contact-link-label">
+          <span class="contact-link-type">LinkedIn</span>
+          <span>linkedin.com/in/hayden</span>
+        </div>
+        <span>↗</span>
+      </a>
+      <a class="contact-link" href="https://github.com/hayden" target="_blank">
+        <div class="contact-link-label">
+          <span class="contact-link-type">GitHub</span>
+          <span>github.com/hayden</span>
+        </div>
+        <span>↗</span>
+      </a>
+      <a class="contact-link" href="resume.pdf" target="_blank">
+        <div class="contact-link-label">
+          <span class="contact-link-type">Resume</span>
+          <span>Download PDF</span>
+        </div>
+        <span>↓</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built with HTML/CSS — Hayden © 2025</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
